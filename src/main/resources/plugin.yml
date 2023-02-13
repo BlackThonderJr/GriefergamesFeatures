@@ -1,0 +1,5 @@
+name: GriefergamesFeatures
+version: '${project.version}'
+main: de.blackthonderjr.griefergames.features.Main
+api-version: 1.16
+depend: [ LuckPerms, EssentialsX, PlotSquared, PlaceholderAPI ]
