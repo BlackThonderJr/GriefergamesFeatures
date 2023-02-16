@@ -1,5 +1,8 @@
 package de.blackthonderjr.griefergames.features;
 
+import de.blackthonderjr.griefergames.features.cmd.PerkCMD;
+import de.blackthonderjr.griefergames.features.events.MainListener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -11,7 +14,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        getCommand("perks").setExecutor(new PerkCMD());
+        Bukkit.getPluginManager().registerEvents(new MainListener(), this);
 
     }
 
