@@ -15,6 +15,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         config();
         getCommand("perks").setExecutor(new PerkCMD());
         Bukkit.getPluginManager().registerEvents(new MainListener(), this);
@@ -26,6 +27,7 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
     public void config(){
+        getConfig().addDefault("PerkPrefix", "&8[§6Perks§8] §r");
         getConfig().addDefault("NoFallPerk", 500000);
         getConfig().addDefault("ClearChatPerk", 400000);
         getConfig().addDefault("StartKickPerk", 1500000);

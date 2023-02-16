@@ -337,6 +337,8 @@ public class PerkCMD implements CommandExecutor {
                 inv.setItem(i, fillitem);
             }
         }
+        Player player = (Player)sender;
+        player.openInventory(inv);
         return false;
     }
     public ItemStack preis(Integer Preis) {

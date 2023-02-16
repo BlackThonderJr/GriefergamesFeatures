@@ -23,7 +23,7 @@ public class MainListener implements Listener {
         Player player = (Player) e.getWhoClicked();
         Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         File Perk = new File("plugins/GrieferGames/Data/Perk.yml");
-        String Prefix = Main.getInstance().getConfig().getString("Prefix").replace("&", "§");
+        String Prefix = Main.getInstance().getConfig().getString("PerkPrefix").replace("&", "§");
         String NoPerms = Main.getInstance().getConfig().getString("NoPerms").replace("&", "§");
         YamlConfiguration yPerk = YamlConfiguration.loadConfiguration(Perk);
         Integer NoFall = Main.getInstance().getConfig().getInt("NoFallPerk");
@@ -48,7 +48,7 @@ public class MainListener implements Listener {
                     if (!(money < NoFall)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - NoFall);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das NoFall-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das NoFall-Perk gekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".NoFall", true);
                         yPerk.save(Perk);
@@ -57,13 +57,31 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".NoFall") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6NoFall-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".NoFall", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".NoFall") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6NoFall-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".NoFall", true);
+
+                    yPerk.save(Perk);
+
                 }
             } else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Clearchat") {
                 if (yPerk.getString(player.getUniqueId() + ".Clearchat") == null) {
                     if (!(money < ClearChatPerk)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - ClearChatPerk);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das ClearChat-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das ClearChat-Perk gekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Clearchat", true);
                         yPerk.save(Perk);
@@ -132,6 +150,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Nohunger") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6NoHunger-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Nohunger", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Nohunger") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6NoHunger-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Nohunger", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Sprungkraft") {
                 if (yPerk.getString(player.getUniqueId() + ".Sprungkraft") == null) {
@@ -147,6 +183,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Sprungkraft") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Sprungkraft-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Sprungkraft", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Sprungkraft") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Sprungkraft-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Sprungkraft", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Stärke") {
                 if (yPerk.getString(player.getUniqueId() + ".Stärke") == null) {
@@ -162,6 +216,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Stärke") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Stärke-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Stärke", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Stärke") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Stärke-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Stärke", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Unterwasseratmung") {
                 if (yPerk.getString(player.getUniqueId() + ".Unterwasseratmung") == null) {
@@ -177,6 +249,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Unterwasseratmung") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Unterwasseratmung-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Unterwasseratmung", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Unterwasseratmung") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Unterwasseratmung-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Unterwasseratmung", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Feuerresistenz") {
                 if (yPerk.getString(player.getUniqueId() + ".Feuerresistenz") == null) {
@@ -192,6 +282,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Feuerresistenz") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Feuerresistenz-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Feuerresistenz", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Feuerresistenz") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Feuerresistenz-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Feuerresistenz", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Schnelligkeit") {
                 if (yPerk.getString(player.getUniqueId() + ".Schnelligkeit") == null) {
@@ -207,6 +315,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Schnelligkeit") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Schnelligkeit-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Schnelligkeit", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Schnelligkeit") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Schnelligkeit-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Schnelligkeit", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Keephotbar") {
                 if (yPerk.getString(player.getUniqueId() + ".Keephotbar") == null) {
@@ -222,6 +348,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Keephotbar") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepHotbar-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Keephotbar", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Keephotbar") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepHotbar-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Keephotbar", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Keepxp") {
                 if (yPerk.getString(player.getUniqueId() + ".Keepxp") == null) {
@@ -237,6 +381,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Keepxp") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepXP-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Keepxp", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Keepxp") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepXP-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Keepxp", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Doppeltexp") {
                 if (yPerk.getString(player.getUniqueId() + ".Doppeltexp") == null) {
@@ -252,13 +414,31 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Doppeltexp") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Doppelte XP-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Doppeltexp", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Doppeltexp") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Doppelte XP-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Doppeltexp", true);
+
+                    yPerk.save(Perk);
+
                 }
             }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Nachtsicht") {
                 if (yPerk.getString(player.getUniqueId() + ".Nachtsicht") == null) {
                     if (!(money < Nachtsicht)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Nachtsicht);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Nachtsicht-Perk gekauft!");
+                        player.sendMessage(Prefix + "§7Du hast das §6KeepXP-Perk §aaktiviert!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Nachtsicht", true);
                         yPerk.save(Perk);
@@ -267,6 +447,24 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Nachtsicht") == true) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Nachtsicht-Perk §cdeaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Nachtsicht", false);
+
+                    yPerk.save(Perk);
+
+                } else if(yPerk.getBoolean(player.getUniqueId() + ".Nachtsicht") == false) {
+
+                    player.closeInventory();
+                    player.sendMessage(Prefix + "§7Du hast das §6Nachtsicht-Perk §aaktiviert§7!");
+
+                    yPerk.set(player.getUniqueId() + ".Nachtsicht", true);
+
+                    yPerk.save(Perk);
+
                 }
             }
         }
