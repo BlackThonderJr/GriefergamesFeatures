@@ -14,8 +14,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -28,6 +30,7 @@ public class PerkCMD implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         ArrayList<String> on = new ArrayList<>();
         ArrayList<String> off = new ArrayList<>();
+        ArrayList<String> notOff = new ArrayList<>();
         ArrayList<String> nofall = new ArrayList<>();
         ArrayList<String> clearchat = new ArrayList<>();
         ArrayList<String> startkick = new ArrayList<>();
@@ -69,7 +72,7 @@ public class PerkCMD implements CommandExecutor {
 
         int i;
         int slots = 54;
-        ItemStack fillitem = new ItemStack(Material.GRAY_STAINED_GLASS);
+        ItemStack fillitem = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
         ItemMeta fillmeta = fillitem.getItemMeta();
         fillmeta.setDisplayName("§´");
         fillmeta.setLocalizedName("fill");
@@ -79,7 +82,9 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta nofallmeta = nofallitem.getItemMeta();
         nofallmeta.setDisplayName("§6Kein Fallschaden");
         nofallmeta.setLocalizedName("Nofall");
-        nofall.add("§7Wenn du dieses Perk besitzt, bekommst du\nkeinen Fallschaden mehr,\nKosten: " + NoFall);
+        nofall.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        nofall.add("§7keinen Fallschaden mehr.");
+        nofall.add("§7Kosten: §e" + NoFall);
         nofallmeta.setLore(nofall);
         nofallitem.setItemMeta(nofallmeta);
 
@@ -87,7 +92,9 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta clearchatmeta = clearchatitem.getItemMeta();
         clearchatmeta.setDisplayName("§6ClearChat-Befehl");
         clearchatmeta.setLocalizedName("Clearchat");
-        clearchat.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl\n§e/clearchat §7benutzen, um den Chat zu leeren.\nKosten: " + ClearChatPerk);
+        clearchat.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl");
+        clearchat.add("§e/clearchat §7benutzen, um den Chat zu leeren.");
+        clearchat.add("§7Kosten: §e" + ClearChatPerk);
         clearchatmeta.setLore(clearchat);
         clearchatitem.setItemMeta(clearchatmeta);
 
@@ -95,7 +102,9 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta startkickmeta = startkickitem.getItemMeta();
         startkickmeta.setDisplayName("§6Startkick-Befehl");
         startkickmeta.setLocalizedName("Startkick");
-        startkick.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl\n§e/startkick §7benutzen, um eine Abstimmung für einen Rauswurf zu starten.\nKosten: " + StartKickPerk);
+        startkick.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl");
+        startkick.add("§e/startkick §7benutzen, um eine Abstimmung für einen Rauswurf zu starten.");
+        startkick.add("§7Kosten: §e" + StartKickPerk);
         startkickmeta.setLore(startkick);
         startkickitem.setItemMeta(startkickmeta);
 
@@ -103,7 +112,9 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta slowchatmeta = slowchatitem.getItemMeta();
         slowchatmeta.setDisplayName("§6Slowchat-Befehl");
         slowchatmeta.setLocalizedName("Slowchat");
-        slowchat.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl\n§e/slowchat §7benutzen, um den Chat zu verlangsamen.\nKosten: " + SlowChatPerk);
+        slowchat.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl");
+        slowchat.add("§e/slowchat §7benutzen, um den Chat zu verlangsamen.");
+        slowchat.add("§7Kosten: §e" + SlowChatPerk);
         slowchatmeta.setLore(slowchat);
         slowchatitem.setItemMeta(slowchatmeta);
 
@@ -111,7 +122,9 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta mutepmeta = mutepitem.getItemMeta();
         mutepmeta.setDisplayName("§6MuteP-Befehl");
         mutepmeta.setLocalizedName("Mutep");
-        mutep.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl\n§e/mutep §7benutzen, um einen Spieler für 15 Minuten zu muten.\nKosten: " + MutepPerk);
+        mutep.add("§7Wenn du dieses Perk besitzt, kannst du den Befehl");
+        mutep.add("§e/mutep §7benutzen, um einen Spieler für 15 Minuten zu muten:");
+        mutep.add("§7Kosten: §e" + MutepPerk);
         mutepmeta.setLore(slowchat);
         mutepitem.setItemMeta(mutepmeta);
 
@@ -119,14 +132,18 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta nohungermeta = nohungeritem.getItemMeta();
         nohungermeta.setDisplayName("§6Kein Hunger");
         nohungermeta.setLocalizedName("Nohunger");
-        nohunger.add("§7Wenn du dieses Perk besitzt, bekommst du\nkeinen Hunger mehr.\nKosten: " + NoHunger);
+        nohunger.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        nohunger.add("§7keinen Hunger mehr.");
+        nohunger.add("§7Kosten: §e" + NoHunger);
         nohungermeta.setLore(nohunger);
         nohungeritem.setItemMeta(nohungermeta);
 
         ItemStack keephotbaritem = new ItemStack(Material.CHEST);
         ItemMeta keephotbarmeta = keephotbaritem.getItemMeta();
         keephotbarmeta.setDisplayName("§6KeepHotbar");
-        keepinv.add("§7Wenn du dieses Perk besitzt, verlierst du\nbeim Tod deine Hotbar nicht mehr.\nKosten: " + KeepHotbar);
+        keepinv.add("§7Wenn du dieses Perk besitzt, verlierst du");
+        keepinv.add("§7beim Tod deine Hotbar nicht mehr.");
+        keepinv.add("§7Kosten: §e" + KeepXP);
         keephotbarmeta.setLore(keepinv);
         keephotbarmeta.setLocalizedName("Keephotbar");
         keephotbaritem.setItemMeta(keephotbarmeta);
@@ -134,7 +151,9 @@ public class PerkCMD implements CommandExecutor {
         ItemStack keepxpitem = new ItemStack(Material.EXPERIENCE_BOTTLE);
         ItemMeta keepxpmeta = keepxpitem.getItemMeta();
         keepxpmeta.setDisplayName("§6KeepXP");
-        keepxp.add("§7Wenn du dieses Perk besitzt, verlierst du\nbeim Tod deine Erfahrungspunkte nicht mehr.\nKosten: " + KeepXP);
+        keepxp.add("§7Wenn du dieses Perk besitzt, verlierst du");
+        keepxp.add("§7beim Tod deine Erfahrungspunkte nicht mehr.");
+        keepxp.add("§7Kosten: §e" + KeepXP);
         keepxpmeta.setLore(keepxp);
         keepxpmeta.setLocalizedName("Keepxp");
         keepxpitem.setItemMeta(keepxpmeta);
@@ -143,7 +162,9 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta doppeltexpmeta = doppeltexpitem.getItemMeta();
         doppeltexpmeta.setDisplayName("§6Doppelte XP");
         doppeltexpmeta.setLocalizedName("Doppeltexp");
-        doppeltxp.add("§7Wenn du dieses Perk besitzt, bekommst du\nimmer die doppelten Erfahrungspunkte.\nKosten: " + DoppelteXP);
+        doppeltxp.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        doppeltxp.add("§7immer die doppelten Erfahrungspunkte.");
+        doppeltxp.add("Kosten: " + DoppelteXP);
         doppeltexpmeta.setLore(doppeltxp);
         doppeltexpitem.setItemMeta(doppeltexpmeta);
 
@@ -151,51 +172,69 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta nachtsichtmeta = nachtsichtitem.getItemMeta();
         nachtsichtmeta.setDisplayName("§6Nachtsicht+");
         nachtsichtmeta.setLocalizedName("Nachtsicht");
-        nachtsicht.add("§7Wenn du dieses Perk besitzt, hast du\neinen dauerhaften Nachtsicht-Effekt.\nKosten: " + Nachtsicht);
+        nachtsicht.add("§7Wenn du dieses Perk besitzt,");
+        nachtsicht.add("§7einen dauerhaften Nachtsicht-Effekt.");
+        nachtsicht.add("§7Kosten: §e" + Nachtsicht);
         nachtsichtmeta.setLore(nachtsicht);
         nachtsichtitem.setItemMeta(nachtsichtmeta);
 
+        Potion potion = new Potion(PotionType.SPEED, 1);
+        Potion potion2 = new Potion(PotionType.STRENGTH, 1);
+        Potion potion3 = new Potion(PotionType.JUMP, 1);
+        Potion potion4 = new Potion(PotionType.FIRE_RESISTANCE, 1);
+        Potion potion5 = new Potion(PotionType.WATER_BREATHING, 1);
 
-        ItemStack jumpitem = new ItemStack(Material.POTION);
+
+        ItemStack jumpitem = potion3.toItemStack(1);
         PotionMeta jumpmeta = (PotionMeta) jumpitem.getItemMeta();
         jumpmeta.setMainEffect(PotionEffectType.JUMP);
         jumpmeta.setDisplayName("§6Sprungkraft+");
         jumpmeta.setLocalizedName("Sprungkraft");
-        jump.add("Wenn du dieses Perk besitzt, bekommst du\neinen dauerhaften Sprungkraft-Effekt.\nKosten: " + Sprungkraft);
+        jump.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        jump.add("§7einen dauerhaften Sprungkraft-Effekt.");
+        jump.add("§7Kosten: §e" + Sprungkraft);
         jumpmeta.setLore(jump);
         jumpitem.setItemMeta(jumpmeta);
 
-        ItemStack strengthitem = new ItemStack(Material.POTION);
+        ItemStack strengthitem = potion2.toItemStack(1);
         PotionMeta strengthmeta = (PotionMeta) strengthitem.getItemMeta();
         strengthmeta.setMainEffect(PotionEffectType.INCREASE_DAMAGE);
         strengthmeta.setDisplayName("§6Stärke+");
-        stärke.add("Wenn du dieses Perk besitzt, bekommst du\neinen dauerhaften Sprungkraft-Effekt.\nKosten: " + Stärke);
+        stärke.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        stärke.add("§7einen dauerhaften Stärke-Effekt.");
+        stärke.add("§7Kosten: §e" + Stärke);
         strengthmeta.setLore(stärke);
         strengthmeta.setLocalizedName("Stärke");
         strengthitem.setItemMeta(strengthmeta);
 
-        ItemStack wateritem = new ItemStack(Material.POTION);
+        ItemStack wateritem = potion5.toItemStack(1);
         PotionMeta watermeta = (PotionMeta) wateritem.getItemMeta();
         watermeta.setMainEffect(PotionEffectType.WATER_BREATHING);
         watermeta.setDisplayName("§6Unterwasseratmung+");
-        wasser.add("Wenn du dieses Perk besitzt, bekommst du\neinen dauerhaften Sprungkraft-Effekt.\nKosten: " + Unterwasseratmung);
+        wasser.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        wasser.add("§7keinen Wasserschaden mehr.");
+        wasser.add("§7Kosten: §e" + Unterwasseratmung);
         watermeta.setLore(wasser);
         watermeta.setLocalizedName("Unterwasseratmung");
         wateritem.setItemMeta(watermeta);
 
-        ItemStack fireitem = new ItemStack(Material.POTION);
+        ItemStack fireitem = potion4.toItemStack(1);
         PotionMeta firemeta = (PotionMeta) fireitem.getItemMeta();
         firemeta.setMainEffect(PotionEffectType.FIRE_RESISTANCE);
         firemeta.setDisplayName("§6Feuerresistenz+");
-        feuer.add("Wenn du dieses Perk besitzt, bekommst du\neinen dauerhaften Sprungkraft-Effekt.\nKosten: " + Feuerresistanz);
+        feuer.add("§7Wenn du dieses Perk besitzt, bekommst du");
+        feuer.add("§7keinen Feuerschaden mehr.");
+        feuer.add("§7Kosten: §e" + Feuerresistanz);
         firemeta.setLore(feuer);
         firemeta.setLocalizedName("Feuerresistenz");
         fireitem.setItemMeta(firemeta);
 
-        ItemStack speeditem = new ItemStack(Material.POTION);
+        ItemStack speeditem = potion.toItemStack(1);
         PotionMeta speedmeta = (PotionMeta) speeditem.getItemMeta();
         speedmeta.setMainEffect(PotionEffectType.SPEED);
-        speed.add("Wenn du dieses Perk besitzt, bekommst du\neinen dauerhaften Sprungkraft-Effekt.\nKosten: " + Schnelligkeit);
+        speed.add("§7Wenn du dieses Perk besitzt, bist du");
+        speed.add("§7viel schneller auf dem Server.");
+        speed.add("§7Kosten: §e" + Schnelligkeit);
         speedmeta.setLore(speed);
         speedmeta.setDisplayName("§6Schnelligkeit+");
         speedmeta.setLocalizedName("Schnelligkeit");
@@ -203,12 +242,20 @@ public class PerkCMD implements CommandExecutor {
 
         //Aktiviert
         @SuppressWarnings("deprecation")
-        ItemStack Aktiviert = new ItemStack(Material.GREEN_STAINED_GLASS_PANE, 1, (short) 10);
+        ItemStack Aktiviert = new ItemStack(Material.GREEN_STAINED_GLASS_PANE, 1);
         ItemMeta AktiviertM = Aktiviert.getItemMeta();
-        AktiviertM.setDisplayName("§aAktiviert");
+        AktiviertM.setDisplayName("§2Aktiviert");
         on.add("§4Klicke, um das Perk zu deaktiveren.");
         AktiviertM.setLore(on);
         Aktiviert.setItemMeta(AktiviertM);
+
+        @SuppressWarnings("deprecation")
+        ItemStack NonDeaktivier = new ItemStack(Material.GREEN_STAINED_GLASS_PANE, 1);
+        ItemMeta NonDeaktivierM = Aktiviert.getItemMeta();
+        NonDeaktivierM.setDisplayName("§2Aktiviert");
+        notOff.add("§cDu kannst dieses Perk nicht deaktivieren.");
+        NonDeaktivierM.setLore(notOff);
+        Aktiviert.setItemMeta(NonDeaktivierM);
 
         //Deaktiviert
         @SuppressWarnings("deprecation")
@@ -237,11 +284,11 @@ public class PerkCMD implements CommandExecutor {
         inv.setItem(23,strengthitem);
         inv.setItem(24,jumpitem);
 
-        inv.setItem(38,clearchatitem);
-        inv.setItem(39,startkickitem);
+        inv.setItem(38,keephotbaritem);
+        inv.setItem(39,keepxpitem);
 
-        inv.setItem(41,slowchatitem);
-        inv.setItem(42,mutepitem);
+        inv.setItem(41,doppeltexpitem);
+        inv.setItem(42,nachtsichtitem);
 
 
 
@@ -259,25 +306,25 @@ public class PerkCMD implements CommandExecutor {
         if(yPerk.getString(p.getUniqueId() + ".Clearchat") == null) {
             inv.setItem(11, preis(MutepPerk));
         } else if(yPerk.getBoolean(p.getUniqueId() + ".Clearchat") == true) {
-            inv.setItem(11, Aktiviert);
+            inv.setItem(11, NonDeaktivier);
         }
 
         if(yPerk.getString(p.getUniqueId() + ".Startkick") == null) {
             inv.setItem(12, preis(MutepPerk));
         } else if(yPerk.getBoolean(p.getUniqueId() + ".Startkick") == true) {
-            inv.setItem(12, Aktiviert);
+            inv.setItem(12, NonDeaktivier);
         }
 
         if(yPerk.getString(p.getUniqueId() + ".SlowChat") == null) {
             inv.setItem(14, preis(MutepPerk));
         } else if(yPerk.getBoolean(p.getUniqueId() + ".SlowChat") == true) {
-            inv.setItem(14, Aktiviert);
+            inv.setItem(14, NonDeaktivier);
         }
 
         if(yPerk.getString(p.getUniqueId() + ".Mutep") == null) {
             inv.setItem(15, preis(MutepPerk));
         } else if(yPerk.getBoolean(p.getUniqueId() + ".Mutep") == true) {
-            inv.setItem(15, Aktiviert);
+            inv.setItem(15, NonDeaktivier);
         }
         if(yPerk.getString(p.getUniqueId() + ".Nohunger") == null) {
             inv.setItem(16, preis(MutepPerk));

@@ -43,12 +43,12 @@ public class MainListener implements Listener {
         Integer Nachtsicht = Main.getInstance().getConfig().getInt("NachtsichtPerk");
         Integer money = Integer.valueOf(ess.getUser(player).getMoney().intValue());
         if (e.getCurrentItem().getItemMeta().getLocalizedName() != "fill") {
-            if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Nofall") {
+            if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Nofall")) {
                 if (yPerk.getString(player.getUniqueId() + ".NoFall") == null) {
                     if (!(money < NoFall)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - NoFall);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§aDu hast das NoFall-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6NoFall§a-Perk für §2"+ NoFall +" gekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".NoFall", true);
                         yPerk.save(Perk);
@@ -60,7 +60,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".NoFall") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6NoFall-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6NoFall§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".NoFall", false);
 
@@ -69,19 +69,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".NoFall") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6NoFall-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6NoFall§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".NoFall", true);
 
                     yPerk.save(Perk);
 
                 }
-            } else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Clearchat") {
+            } else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Clearchat")) {
                 if (yPerk.getString(player.getUniqueId() + ".Clearchat") == null) {
                     if (!(money < ClearChatPerk)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - ClearChatPerk);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§aDu hast das ClearChat-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6NoFall§a-Perk für §2"+ ClearChatPerk +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Clearchat", true);
                         yPerk.save(Perk);
@@ -90,13 +90,17 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Clearchat") == true) {
+
+                    player.closeInventory();
+
                 }
-            } else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Startkick") {
+            } else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Startkick")) {
                 if (yPerk.getString(player.getUniqueId() + ".Startkick") == null) {
                     if (!(money < StartKickPerk)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - StartKickPerk);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das StartKick-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6StartKick§a-Perk für §2"+ StartKickPerk +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Startkick", true);
                         yPerk.save(Perk);
@@ -105,13 +109,17 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Startkick") == true) {
+
+                    e.setCancelled(true);
+
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Slowchat") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Slowchat")) {
                 if (yPerk.getString(player.getUniqueId() + ".Slowchat") == null) {
                     if (!(money < SlowChatPerk)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - SlowChatPerk);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das SlowChat-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6SlowChat§a-Perk für §2"+ SlowChatPerk +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Slowchat", true);
                         yPerk.save(Perk);
@@ -120,13 +128,17 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Slowchat") == true) {
+
+                    e.setCancelled(true);
+
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Mutep") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Mutep")) {
                 if (yPerk.getString(player.getUniqueId() + ".Mutep") == null) {
                     if (!(money < MutepPerk)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - MutepPerk);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Mutep-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6MuteP§a-Perk für §2" + MutepPerk + " §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Mutep", true);
                         yPerk.save(Perk);
@@ -135,13 +147,18 @@ public class MainListener implements Listener {
                         player.closeInventory();
                         player.sendMessage(Prefix + "§cDu hast leider nicht genügend Geld!");
                     }
+                }else if(yPerk.getBoolean(player.getUniqueId() + ".Mutep") == true) {
+
+                    e.setCancelled(true);
+
+
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Nohunger") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Nohunger")) {
                 if (yPerk.getString(player.getUniqueId() + ".Nohunger") == null) {
                     if (!(money < NoHunger)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - NoHunger);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das NoHunger-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6NoHunger§a-Perk für §2"+ NoHunger +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Nohunger", true);
                         yPerk.save(Perk);
@@ -153,7 +170,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Nohunger") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6NoHunger-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6NoHunger§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Nohunger", false);
 
@@ -162,19 +179,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Nohunger") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6NoHunger-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6NoHunger§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Nohunger", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Sprungkraft") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Sprungkraft")) {
                 if (yPerk.getString(player.getUniqueId() + ".Sprungkraft") == null) {
                     if (!(money < Sprungkraft)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Sprungkraft);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Sprungkraft-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Sprungkraft§a-Perk für §2"+ Sprungkraft +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Sprungkraft", true);
                         yPerk.save(Perk);
@@ -186,7 +203,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Sprungkraft") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Sprungkraft-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Sprungkraft§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Sprungkraft", false);
 
@@ -195,19 +212,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Sprungkraft") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Sprungkraft-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Sprungkraft§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Sprungkraft", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Stärke") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Stärke")) {
                 if (yPerk.getString(player.getUniqueId() + ".Stärke") == null) {
                     if (!(money < Stärke)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Stärke);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Stärke-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Stärke§a-Perk für §2"+ Stärke +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Stärke", true);
                         yPerk.save(Perk);
@@ -219,7 +236,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Stärke") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Stärke-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Stärke§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Stärke", false);
 
@@ -228,19 +245,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Stärke") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Stärke-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Stärke§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Stärke", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Unterwasseratmung") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Unterwasseratmung")) {
                 if (yPerk.getString(player.getUniqueId() + ".Unterwasseratmung") == null) {
                     if (!(money < Unterwasseratmung)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Unterwasseratmung);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Unterwasseratmung-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Unterwasseratmung§a-Perk für §2"+ Unterwasseratmung +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Unterwasseratmung", true);
                         yPerk.save(Perk);
@@ -252,7 +269,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Unterwasseratmung") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Unterwasseratmung-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Unterwasseratmung§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Unterwasseratmung", false);
 
@@ -261,19 +278,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Unterwasseratmung") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Unterwasseratmung-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Unterwasseratmung§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Unterwasseratmung", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Feuerresistenz") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Feuerresistenz")) {
                 if (yPerk.getString(player.getUniqueId() + ".Feuerresistenz") == null) {
                     if (!(money < Feuerresistanz)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Feuerresistanz);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Feuerresistenz-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Feuerresistenz§a-Perk für §2"+ Feuerresistanz +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Feuerresistenz", true);
                         yPerk.save(Perk);
@@ -285,7 +302,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Feuerresistenz") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Feuerresistenz-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Feuerresistenz§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Feuerresistenz", false);
 
@@ -294,19 +311,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Feuerresistenz") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Feuerresistenz-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Feuerresistenz§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Feuerresistenz", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Schnelligkeit") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Schnelligkeit")) {
                 if (yPerk.getString(player.getUniqueId() + ".Schnelligkeit") == null) {
                     if (!(money < Schnelligkeit)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Schnelligkeit);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Schnelligkeit-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Schnelligkeit§a-Perk für §2"+ Schnelligkeit +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Schnelligkeit", true);
                         yPerk.save(Perk);
@@ -318,7 +335,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Schnelligkeit") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Schnelligkeit-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Schnelligkeit§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Schnelligkeit", false);
 
@@ -327,19 +344,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Schnelligkeit") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Schnelligkeit-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Schnelligkeit§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Schnelligkeit", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Keephotbar") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Keephotbar")) {
                 if (yPerk.getString(player.getUniqueId() + ".Keephotbar") == null) {
                     if (!(money < KeepHotbar)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - KeepHotbar);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das KeepHotbar-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6KeepHotbar§a-Perk für §2"+ KeepHotbar +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Keephotbar", true);
                         yPerk.save(Perk);
@@ -351,7 +368,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Keephotbar") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6KeepHotbar-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepHotbar§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Keephotbar", false);
 
@@ -360,19 +377,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Keephotbar") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6KeepHotbar-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepHotbar§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Keephotbar", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Keepxp") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Keepxp")) {
                 if (yPerk.getString(player.getUniqueId() + ".Keepxp") == null) {
                     if (!(money < KeepXP)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - KeepXP);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das KeepXP-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6KeepXP§a-Perk für §2"+ KeepXP +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Keepxp", true);
                         yPerk.save(Perk);
@@ -384,7 +401,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Keepxp") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6KeepXP-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepXP§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Keepxp", false);
 
@@ -393,19 +410,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Keepxp") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6KeepXP-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6KeepXP§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Keepxp", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Doppeltexp") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Doppeltexp")) {
                 if (yPerk.getString(player.getUniqueId() + ".Doppeltexp") == null) {
                     if (!(money < DoppelteXP)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - DoppelteXP);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§a§lDu hast das Doppelte XP-Perk gekauft!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Doppelte XP§a-Perk für §2"+ DoppelteXP +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Doppeltexp", true);
                         yPerk.save(Perk);
@@ -417,7 +434,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Doppeltexp") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Doppelte XP-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Doppelte XP§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Doppeltexp", false);
 
@@ -426,19 +443,19 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Doppeltexp") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Doppelte XP-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Doppelte XP§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Doppeltexp", true);
 
                     yPerk.save(Perk);
 
                 }
-            }else if (e.getCurrentItem().getItemMeta().getLocalizedName() == "Nachtsicht") {
+            }else if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Nachtsicht")) {
                 if (yPerk.getString(player.getUniqueId() + ".Nachtsicht") == null) {
                     if (!(money < Nachtsicht)) {
                         BigDecimal neuesgeld = BigDecimal.valueOf(money - Nachtsicht);
                         player.closeInventory();
-                        player.sendMessage(Prefix + "§7Du hast das §6KeepXP-Perk §aaktiviert!");
+                        player.sendMessage(Prefix + "§aDu hast das §6Nachtsicht§a-Perk für §2"+ Nachtsicht +" §agekauft!");
                         ess.getUser(player).setMoney(neuesgeld);
                         yPerk.set(player.getUniqueId() + ".Nachtsicht", true);
                         yPerk.save(Perk);
@@ -450,7 +467,7 @@ public class MainListener implements Listener {
                 }else if(yPerk.getBoolean(player.getUniqueId() + ".Nachtsicht") == true) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Nachtsicht-Perk §cdeaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Nachtsicht§7-Perk §cdeaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Nachtsicht", false);
 
@@ -459,14 +476,18 @@ public class MainListener implements Listener {
                 } else if(yPerk.getBoolean(player.getUniqueId() + ".Nachtsicht") == false) {
 
                     player.closeInventory();
-                    player.sendMessage(Prefix + "§7Du hast das §6Nachtsicht-Perk §aaktiviert§7!");
+                    player.sendMessage(Prefix + "§7Du hast das §6Nachtsicht§7-Perk §aaktiviert§7!");
 
                     yPerk.set(player.getUniqueId() + ".Nachtsicht", true);
 
                     yPerk.save(Perk);
 
+                }else {
+                    e.setCancelled(true);
                 }
             }
+        }else{
+            e.setCancelled(true);
         }
     }
 }
