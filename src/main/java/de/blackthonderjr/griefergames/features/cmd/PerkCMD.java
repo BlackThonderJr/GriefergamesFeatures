@@ -220,6 +220,34 @@ public class PerkCMD implements CommandExecutor {
         Deaktiviert.setItemMeta(DeaktiviertM);
         Player p = (Player)sender;
 
+
+
+
+        inv.setItem(1,nofallitem);
+        inv.setItem(2,clearchatitem);
+        inv.setItem(3,startkickitem);
+
+        inv.setItem(5,slowchatitem);
+        inv.setItem(6,mutepitem);
+        inv.setItem(7,nohungeritem);
+
+        inv.setItem(20,speeditem);
+        inv.setItem(21,fireitem);
+        inv.setItem(22,wateritem);
+        inv.setItem(23,strengthitem);
+        inv.setItem(24,jumpitem);
+
+        inv.setItem(38,clearchatitem);
+        inv.setItem(39,startkickitem);
+
+        inv.setItem(41,slowchatitem);
+        inv.setItem(42,mutepitem);
+
+
+
+
+
+
         if(yPerk.getString(p.getUniqueId() + ".NoFall") == null) {
             inv.setItem(10, preis(MutepPerk));
         } else if(yPerk.getBoolean(p.getUniqueId() + ".NoFall") == true) {
