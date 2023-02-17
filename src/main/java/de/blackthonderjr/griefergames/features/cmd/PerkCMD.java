@@ -251,11 +251,11 @@ public class PerkCMD implements CommandExecutor {
 
         @SuppressWarnings("deprecation")
         ItemStack NonDeaktivier = new ItemStack(Material.GREEN_STAINED_GLASS_PANE, 1);
-        ItemMeta NonDeaktivierM = Aktiviert.getItemMeta();
+        ItemMeta NonDeaktivierM = NonDeaktivier.getItemMeta();
         NonDeaktivierM.setDisplayName("§2Aktiviert");
         notOff.add("§cDu kannst dieses Perk nicht deaktivieren.");
         NonDeaktivierM.setLore(notOff);
-        Aktiviert.setItemMeta(NonDeaktivierM);
+        NonDeaktivier.setItemMeta(NonDeaktivierM);
 
         //Deaktiviert
         @SuppressWarnings("deprecation")
