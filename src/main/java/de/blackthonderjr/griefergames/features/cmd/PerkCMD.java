@@ -246,6 +246,7 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta AktiviertM = Aktiviert.getItemMeta();
         AktiviertM.setDisplayName("§2Aktiviert");
         on.add("§4Klicke, um das Perk zu deaktiveren.");
+        AktiviertM.setLocalizedName("aktiviert");
         AktiviertM.setLore(on);
         Aktiviert.setItemMeta(AktiviertM);
 
@@ -263,7 +264,8 @@ public class PerkCMD implements CommandExecutor {
         ItemMeta DeaktiviertM = Deaktiviert.getItemMeta();
         DeaktiviertM.setDisplayName("§cDeaktiviert");
         off.add("§4Klicke, um das Perk zu aktivieren.");
-        AktiviertM.setLore(off);
+        DeaktiviertM.setLore(off);
+        DeaktiviertM.setLocalizedName("deaktiviert");
         Deaktiviert.setItemMeta(DeaktiviertM);
         Player p = (Player)sender;
 

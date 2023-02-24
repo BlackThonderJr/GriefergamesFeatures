@@ -1,6 +1,8 @@
 package de.blackthonderjr.griefergames.features;
 
+import de.blackthonderjr.griefergames.features.cmd.GGRLCMD;
 import de.blackthonderjr.griefergames.features.cmd.PerkCMD;
+import de.blackthonderjr.griefergames.features.cmd.StartJailCMD;
 import de.blackthonderjr.griefergames.features.events.MainListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,12 +15,19 @@ public final class Main extends JavaPlugin {
         return instance;
     }
 
+    public static void reload() {
+        Bukkit.getPluginManager().getPlugin("GriefergamesFeatures").getConfig();
+        Bukkit.getPluginManager().getPlugin("GriefergamesFeatures").reloadConfig();
+    }
+
     @Override
     public void onEnable() {
         instance = this;
         config();
         getCommand("perks").setExecutor(new PerkCMD());
         Bukkit.getPluginManager().registerEvents(new MainListener(), this);
+        getCommand("ggrl").setExecutor(new GGRLCMD());
+        getCommand("startjail").setExecutor(new StartJailCMD());
 
     }
 

@@ -9,13 +9,19 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.units.qual.K;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class MainListener implements Listener {
     @EventHandler
@@ -42,7 +48,7 @@ public class MainListener implements Listener {
         Integer DoppelteXP = Main.getInstance().getConfig().getInt("DoppelteXPPerk");
         Integer Nachtsicht = Main.getInstance().getConfig().getInt("NachtsichtPerk");
         Integer money = Integer.valueOf(ess.getUser(player).getMoney().intValue());
-        if (e.getCurrentItem().getItemMeta().getLocalizedName() != "fill") {
+        if (!(e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("fill"))) {
             if (e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("Nofall")) {
                 if (yPerk.getString(player.getUniqueId() + ".NoFall") == null) {
                     if (!(money < NoFall)) {
@@ -485,9 +491,105 @@ public class MainListener implements Listener {
                 }else {
                     e.setCancelled(true);
                 }
+            }else if(e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("deaktiviert")){
+                e.setCancelled(true);
+            }else if(e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("aktiviert")){
+                e.setCancelled(true);
+            }else if(e.getCurrentItem().getItemMeta().getLocalizedName().equalsIgnoreCase("fill")){
+                e.setCancelled(true);
+            }else{
+                e.setCancelled(true);
             }
         }else{
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onHunger(FoodLevelChangeEvent e) {
+        if(e.getEntity() instanceof Player) {
+
+            Player p = (Player) e.getEntity();
+
+            File Perk = new File("plugins/GrieferGames/Data/Perk.yml");
+            YamlConfiguration yPerk = YamlConfiguration.loadConfiguration(Perk);
+
+            if(yPerk.getString(p.getUniqueId() + ".NoHunger") != null) {
+                if(yPerk.getBoolean(p.getUniqueId() + ".NoHunger") == true) {
+
+                    e.setFoodLevel(20);
+
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onFallDMG(EntityDamageEvent e) {
+        if(e.getEntity() instanceof Player) {
+
+            Player p = (Player) e.getEntity();
+
+            if(e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+
+                File Perk = new File("plugins/GrieferGames/Data/Perk.yml");
+                YamlConfiguration yPerk = YamlConfiguration.loadConfiguration(Perk);
+
+                if(yPerk.getString(p.getUniqueId() + ".NoFall") != null) {
+                    if(yPerk.getBoolean(p.getUniqueId() + ".NoFall") == true) {
+
+                        e.setCancelled(true);
+
+                    }
+                }
+            }
+        }
+    }
+    @EventHandler
+    public void onJailObisianBreak(BlockBreakEvent e) throws IOException {
+        Player player = e.getPlayer();
+        File Jail = new File("plugins/GrieferGames/Data/Jail.yml");
+        YamlConfiguration yJail = YamlConfiguration.loadConfiguration(Jail);
+        Boolean PlayerIsInJail = Boolean.valueOf(yJail.getString(player.getUniqueId().toString()));
+        Boolean TeamJail = Boolean.valueOf(yJail.getString(player.getUniqueId().toString() + ".wasTeam"));
+        int TeamObsidian = Integer.parseInt(yJail.getString(player.getUniqueId().toString() + ".getTeamObsidian"));
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        int ObsidianBreaks = Integer.parseInt(yJail.getString(player.getUniqueId().toString() + ".getObsidianBreaks"));
+        if(PlayerIsInJail){
+            if(TeamJail){
+                if(yJail.getString(player.getUniqueId().toString() + ".getTeamObsidian") != null && ObsidianBreaks < TeamObsidian){
+                    ObsidianBreaks++;
+                    yJail.set(player.getUniqueId().toString() + ".getObsidianBreaks", ObsidianBreaks);
+                    yJail.save(Jail);
+                }else if(yJail.getString(player.getUniqueId().toString() + ".getTeamObsidian") != null && ObsidianBreaks == TeamObsidian){
+                    yJail.set(player.getUniqueId().toString(), false);
+                    yJail.save(Jail);
+                }
+            }else{
+                if(ObsidianBreaks < 15){
+                    ObsidianBreaks++;
+                    yJail.set(player.getUniqueId().toString() + ".getObsidianBreaks", ObsidianBreaks);
+                    yJail.save(Jail);
+                }else if(ObsidianBreaks == 15){
+                    yJail.set(player.getUniqueId().toString(), false);
+                    yJail.save(Jail);
+                }
+            }
+            final Runnable runnable = new Runnable() {
+                int countdownStarter = 300;
+
+                public void run() {
+
+                    System.out.println(countdownStarter);
+                    countdownStarter--;
+
+                    if (countdownStarter < 0) {
+                        e.setCancelled(true);
+                        scheduler.shutdown();
+                    }
+                }
+            };
+            scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
         }
     }
 }

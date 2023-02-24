@@ -6,7 +6,7 @@
 
     <groupId>de.blackthonderjr.griefergames.features</groupId>
     <artifactId>GriefergamesFeatures</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>GriefergamesFeatures</name>

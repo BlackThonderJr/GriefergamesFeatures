@@ -5,3 +5,7 @@ api-version: 1.16
 depend: [ LuckPerms, Essentials, PlotSquared, PlaceholderAPI ]
 commands:
   perks:
+
+  ggrl:
+
+  startjail:
